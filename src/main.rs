@@ -16,7 +16,6 @@ fn main() {
     println!("=== 112 Operator Save Editor ===\n");
 
     loop {
-        // Ask the user whether to use default location or custom
         println!("Choose save location:");
         println!("  1) Use default location (AppData\\LocalLow\\JutsuGames\\112 Operator\\Saves)");
         println!("  2) Enter custom path");
