@@ -29,7 +29,6 @@ fn main() {
                 return;
             }
             "1" => {
-                // Try to detect the user’s AppData path automatically
                 let user = match env::var("USERNAME") {
                     Ok(u) => u,
                     Err(_) => {
@@ -60,8 +59,7 @@ fn main() {
                 continue;
             }
         };
-
-        // Ask for the save file name
+        
         let filename = read_input("Enter the save file name (e.g., Save_free_game_autosave_129_EASY.json): ");
         let mut save_path = save_dir.clone();
         save_path.push(&filename);
@@ -70,8 +68,6 @@ fn main() {
             println!("File not found at {:?}. Returning to start.\n", save_path);
             continue;
         }
-
-        // Load JSON file
         let file_data = match fs::read_to_string(&save_path) {
             Ok(data) => data,
             Err(e) => {
@@ -89,7 +85,6 @@ fn main() {
         };
 
         loop {
-            // Clone top-level keys
             let keys: Vec<String> = match json.as_object() {
                 Some(o) => o.keys().cloned().collect(),
                 None => {
@@ -102,8 +97,6 @@ fn main() {
                 println!("No editable fields found. Returning to start.\n");
                 break;
             }
-
-            // Print all keys (up to 80)
             println!("\nAvailable fields:\n");
             for (i, key) in keys.iter().take(80).enumerate() {
                 println!("{:>3}) {}", i + 1, key);
